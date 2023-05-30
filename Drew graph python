@@ -1,0 +1,37 @@
+import matplotlib.pyplot as plt
+
+def selection_sort(arr):
+    # Traverse through all array elements
+    for i in range(len(arr)):
+        # Find the minimum element in remaining unsorted array
+        min_index = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+                
+        # Swap the found minimum element with the first element        
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+        
+        # Plot the current state of the list
+        plt.clf()
+        plt.bar(range(len(arr)), arr)
+        plt.title("Selection Sort")
+        plt.xlabel("Index")
+        plt.ylabel("Value")
+        plt.pause(0.1)
+    
+    return arr
+
+# Example usage
+my_list = [4, 5, 1, 2]
+plt.bar(range(len(my_list)), my_list)
+plt.title("Selection Sort")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.show()
+sorted_list = selection_sort(my_list)
+plt.bar(range(len(sorted_list)), sorted_list)
+plt.title("SelectionSort")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.show()
