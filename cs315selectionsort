@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void selectionSort(int arr[], int n) {
+    int i, j, min_idx;
+    for (i = 0; i < n-1; i++) {
+        min_idx = i;
+        for (j = i+1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[min_idx];
+        arr[min_idx] = temp;
+    }
+}
+
+int main() {
+    int n, i;
+     clock_t start, end;
+    double time_used;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter the elements:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+   start = clock();
+    selectionSort(arr, n);
+    end = clock();
+    printf("\nSorted array is ");
+    for (i = 0; i < n;i++)
+        printf(" %d ", arr[i]);
+        printf("\n");
+
+    // Best Case - Array is already sorted
+    for (int i = 0; i < n; i++) {
+        arr[i] = i;
+    }
+    start = clock();
+    selectionSort(arr, n);
+    end = clock();
+    time_used = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+    printf("Best Case Execution Time: %f milliseconds\n", time_used);
+
+    // Worst Case - Array is sorted in reverse order
+    for (int i = n-1; i >= 0; i--) {
+        arr[i] = n-i-1;
+    }
+    start = clock();
+    selectionSort(arr, n);
+    end = clock();
+    time_used = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+    printf("Worst Case Execution Time: %f milliseconds\n", time_used);
+
+    // Average Case - Array is randomly ordered
+    srand(time(NULL));
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % n;
+    }
+    start = clock();
+    selectionSort(arr, n);
+    end = clock();
+    time_used = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+    printf("Average Case Execution Time: %f milliseconds\n", time_used);
+
+   return 0;
+}
+
